@@ -1,0 +1,5 @@
+package adept
+
+import (
+	"fmt"
+)

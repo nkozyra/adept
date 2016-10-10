@@ -1,0 +1,12 @@
+{
+    "database": {
+        "user": "",
+        "pass": "",
+        "port": "",
+        "database": ""
+    },
+    "host": {
+        "port": ""
+    },
+    "templates": "templates\/"
+}
