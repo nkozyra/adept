@@ -1,1 +1,34 @@
-<!-- dashboard -->
+{{ template "header" .}}
+{{ template "subheader" .}}
+
+<!-- course -->
+
+<div class="mdl-grid">
+	<div class="mdl-cell--12-col">
+		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--12-col">
+			<h1>Your Courses</h1>
+			</div>
+			{{ range .Courses.Courses }}
+
+			<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone adept-course-list-item">
+				<a class="adept-quiz-list-item-title" href="/course/{{ .GUID }}">
+				<div class="adept-course-list-item-image-container">
+					<img src="{{.ImageURL}}" style="max-width: 100%;"/>
+				</div>
+				<div class="adept-course-list-item-actions">
+					{{ .Name }}
+				</div>
+				</a>
+			</div>
+
+			{{ end }}
+		</div>
+	</div>
+</div>
+
+
+
+
+
+{{ template "footer" }}

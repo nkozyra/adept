@@ -1,0 +1,48 @@
+{{ template "header" }}
+	<ul class="adept-breadcrumbs">
+	<li><a href="/">Home</a></li>
+	{{ range .Breadcrumbs.Breadcrumbs }}
+		<li>{{.Text}}</li>
+	{{ end }}
+	</ul>
+
+<!-- course -->
+
+	<div class="mdl-grid">
+	<div class="mdl-cell--9-col">
+
+
+		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--12-col">
+						<h1>{{ .Course.Name }}</h1>
+						</div>
+{{ range .Quizzes.Quizzes }}
+
+	<div class="mdl-cell mdl-cell--6-col adept-quiz-list-item">
+		<div class="">
+
+			<div class="adept-course-list-item-actions"><a class="adept-quiz-list-item-title" href="/course/{{ $.Course.GUID }}/quizzes/{{ .GUID }}">{{ .Name }}</a></div>
+			<div class="adept-quiz-list-item-description">{{ .ShortDescription }}</div>
+		</div>
+	</div>
+
+{{ end }}
+		</div>
+	</div>
+	<div class="mdl-cell--3-col">
+		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--12-col">
+				<h2>Earned Badges</h2>
+				<p>No Earned Badges</p>
+
+				<h2>Available Badges</h2>
+				<p>7-Day Streak</p>
+			</div>
+		</div>
+
+	</div>
+
+	</div>
+
+
+{{ template "footer" }}

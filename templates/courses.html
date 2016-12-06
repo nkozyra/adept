@@ -1,0 +1,59 @@
+{{ template "header" }}
+	<ul class="adept-breadcrumbs">
+	<li><a href="/">Home</a></li>
+	{{ range .Breadcrumbs.Breadcrumbs }}
+		<li>{{.Text}}</li>
+	{{ end }}
+	</ul>
+
+<!-- course -->
+
+	<div class="mdl-grid">
+
+	<div class="mdl-cell--3-col">
+		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--12-col">
+				<h2>Filter</h2>
+				{{ range .Organizations }}
+					-> Name
+				{{end}}
+
+
+			</div>
+		</div>
+
+	</div>
+
+
+	<div class="mdl-cell--9-col">
+
+
+		<div class="mdl-grid">
+			<div class="mdl-cell mdl-cell--12-col">
+						<h1>All Courses</h1>
+						</div>
+			{{ range .Courses.Courses }}
+
+			<div class="mdl-cell mdl-cell--6-col  adept-course-list-item">
+			<div class="adept-course-list-item-organization">{{ .OrganizationName }} {{ .ExternalID }}</div>
+				<div class="adept-course-list-item-image-container">
+					<img src="{{.ImageURL}}" style="max-width: 100%;"/>
+				</div>
+				<div class="adept-course-list-item-actions">
+					<a class="adept-quiz-list-item-title" href="/course/{{ .GUID }}">{{ .Name }}</a>
+				</div>
+				<div class="adept-course-list-item-course-actions">
+								{{if .Registered}}<a href="/course/{{.GUID}}" class="adept-btn mini peach">Registered</a>{{else}}<a href="/course/{{.GUID}}/join" class="adept-btn mini peach">Join {{.CourseRegisteredCount}} Students</a>{{end}}
+				</div>
+
+			</div>
+
+			{{ end }}
+		</div>
+	</div>
+
+
+	</div>
+
+
+{{ template "footer" }}

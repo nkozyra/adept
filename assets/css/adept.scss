@@ -1,0 +1,303 @@
+/* adept.css */
+
+$green: #87C388;
+$grey: #2e3641;
+$peach: #CD9A6F;
+$midgrey: #9eb2c0;
+$lightgrey: #e9f0f4;
+$white: #fff;
+
+
+@mixin noselect() {
+  -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+     -khtml-user-select: none;
+       -moz-user-select: none; 
+        -ms-user-select: none;
+            user-select: none;	
+}
+
+body {
+	margin: 0px;
+	margin-bottom: 80px;
+	padding: 0px;
+	font-family: arial;
+	background-color: #fff;
+}
+
+body.inverse {
+	background-color: $green;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	margin: 0px;
+	padding: 0px;
+}
+
+.adept-header {
+	background-color:$green;
+	padding: 10px;
+
+	& .logo {
+		height: 40px;
+	}
+
+	&-user {
+		cursor: pointer;
+		background-color: rgba(255,255,255,.1);
+		color: #fff;
+		font-weight: bold;
+		border: 1px solid #eee;
+		padding: 8px;
+		text-align: center;
+		display: inline;
+		text-decoration: none;
+		position: relative;
+		@include noselect();
+
+		&.active, &.active:hover {
+			background-color: darken($green, 50%);
+
+
+		}
+
+		&:hover {
+			background-color: rgba(255,255,255,.2);
+		}
+
+		&-opts {
+			display: none;
+			margin: 0px;
+			position: absolute;
+			top: 100%;
+			left: -1px;
+			background-color: darken($green, 50%);
+			width: calc(100% - 16px);
+			padding: 8px;
+			border: 1px solid #eee;
+			font-size: 12px;
+			text-transform: uppercase;
+
+			& li {
+				list-style: none;
+
+				& a {
+					color: #fff;
+					text-decoration: none;
+				}
+			}
+		}
+	}
+
+	&-link {
+		color: #fff;
+		text-decoration: none;
+		font-weight: bold;
+	}
+}
+
+.adept-breadcrumbs {
+	margin: 0px;
+	padding: 10px;
+	background-color: $white;
+	border-bottom: 1px solid #eee;
+	& li {
+		color: #333;
+		list-style: none;
+		display: inline-block;
+		margin-right: 4px;
+		padding-right: 10px;
+		color: #666;
+		border-right: 1px solid #eee;
+		font-size: 12px;
+		font-weight: bold;
+		&:last-child {
+			border-right: none;
+		}
+
+		& a {
+			color: $green;
+			text-decoration: none;
+		}
+	}
+}
+
+.adept-answer {
+	display: inline-block;
+	width: 15px;
+	height: 20px;
+	background-color: #ff6d69;
+	margin-right: 4px;
+	&.correct {
+		background-color: #6dff69;
+	}
+}
+
+.adept-btn {
+	font-size: 16px;
+	padding: 10px;
+	background-color: $green;
+	cursor: pointer;
+	transition: 250ms all ease-in;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 2px;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 14px;
+	text-decoration: none;
+	color: #fff;
+
+	&:hover {
+		background-color: darken($green, 30%);
+	}
+
+	&.peach {
+		background-color: $peach;
+	}
+
+	&.mini {
+		font-size: 14px;
+		padding: 6px;
+		padding-right: 12px;
+		padding-left: 12px;
+	}
+}
+
+.adept-modal {
+	background-color: $green;
+	box-shadow: 0px 0px 10px rgba(20,20,20,.05);
+	border-radius: 1px;
+
+	& input {
+		width: calc(100% - 16px);
+		padding: 8px;
+		font-size: 16px;
+		border: none;
+	}
+}
+
+.adept-quiz-list-item, .adept-course-list-item {
+
+	text-align: center;
+	border: 1px solid #eee;
+	background-color: #fff;
+	border-radius: 1px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	box-shadow: 0px 0px 10px rgba(20,20,20,.05);
+	min-height: 100px;
+	position: relative; 
+	&-organization {
+		text-align: right;
+		top: 5px;
+		right: 5px;
+		background-color: lighten($grey,20%);
+		padding: 4px;
+		padding-left: 8px;
+		padding-right: 8px;
+		font-size: 12px;
+		color: #fff;
+		font-weight: bold;
+	}
+
+	&-image-container {
+		max-height:200px;
+		overflow:hidden;
+	}
+
+	&-actions {
+		padding: 10px;
+		background-color: $green;		
+	}
+
+	&-course-actions {
+		padding: 15px;
+		text-align: right;
+		background-color: lighten($green,30%);
+	}
+
+	&-title {
+
+		font-size: 16px;
+		text-transform: uppercase;
+		color: #FFF;
+		text-decoration: none;
+		font-weight: bold;
+	}
+
+	&-description {
+		font-size: 12px;
+		text-align: left;
+		padding: 20px;
+		line-height: 18px;
+		margin-top: 10px;
+	}
+}
+
+#adept-quiz {
+	@include noselect();
+	position: relative;
+	& ul {
+		margin: 0px;
+		padding: 0px;
+
+		& li {
+			list-style: none;
+		}
+	}
+
+
+}
+
+.adept-quiz {
+
+
+	&-container {
+		padding: 40px;
+		border-radius: 2px;
+		background-color: #fff;
+	}
+	&-timer {
+	    position: absolute;
+	    top: -80px;
+	    left: -80px;
+	    font-size: 20px;
+	    font-weight: bold;
+	    border-radius: 60%;
+	    border-top-left-radius: 0px;
+	    border-top-right-radius: 0px;
+	    border-bottom-left-radius: 0px;
+	    background-color: $green;
+	    color: #fff;
+	    width: 40px;
+	    height: 40px;
+	    line-height: 40px;
+	    text-align: center;
+	}
+}
+
+
+
+
+.adept-course {
+	position: relative;
+
+	&-actions {
+		text-align: left;
+	margin-top: 20px;
+	}
+
+
+
+}
+
+footer {
+	position: fixed;
+	bottom: 0px;
+	padding: 10px;
+	background-color: darken($green,80%);
+	width: 100%;
+	color: #fff;
+	font-size: 14px;
+}

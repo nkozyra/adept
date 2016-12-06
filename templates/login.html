@@ -1,0 +1,35 @@
+{{ template "modalheader" }}
+	<ul class="adept-breadcrumbs">
+	<li><a href="/">Home</a></li>
+	{{ range .Breadcrumbs.Breadcrumbs }}
+		<li>{{.Text}}</li>
+	{{ end }}
+	</ul>
+
+<!-- course -->
+
+
+		<div class="adept-modal">
+			<form id="loginForm" method="post" action="/login">
+			<div class="mdl-grid">
+				<div class="mdl-cell mdl-cell--12-col">
+					<h1>Log In</h1>
+				</div>
+				<div class="mdl-cell mdl-cell--12-col">
+					<input type="text" name="username" placeholder="Username" />
+				</div>
+				<div class="mdl-cell mdl-cell--12-col">
+					<input type="password" name="password" placeholder="Password" />
+
+				<div class="mdl-cell mdl-cell--12-col">
+					<div style="padding: 10px;text-align: right">
+					<a onclick="document.querySelector('#loginForm').submit();" class="adept-btn adept-btn-login">Log In</a>
+					</div>
+				</div>								
+			</div>
+		</div>
+		</form>
+	</div>
+
+
+{{ template "footer" }}

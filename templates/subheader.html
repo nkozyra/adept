@@ -1,0 +1,9 @@
+{{define "subheader"}}
+	<ul class="adept-breadcrumbs">
+	<li><a href="/">Home</a></li>
+
+	{{ range .Breadcrumbs.Breadcrumbs }}
+		<li>{{ if .Active}}<a href="{{.Link}}">{{.Text}}</a>{{else}}{{.Text}}{{end}}</li>
+	{{ end }}
+	</ul>
+{{end}}

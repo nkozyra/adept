@@ -1,1 +1,70 @@
+{{ template "header" .}}
 <!-- class/quiz -->
+<script>
+var Quiz = '{{.Key}}';
+</script>
+
+	<script src="/assets/js/questions.js"></script>
+	<div class="mdl-grid" style="width:900px;margin:auto;background-color:#fff;">
+		<div class="mdl-cell mdl-cell--12-col adept-quiz">
+		<div class="adept-quiz-container">
+
+		<div id="adept-status" style="display:none;"></div>
+
+			<div class="mdl-grid">
+				<div class="mdl-cell mdl-cell--9-col">
+			<div id="adept-quiz">
+
+			</div>
+				</div>
+				<div class="mdl-cell mdl-cell--3-col">
+					<canvas id="myChart" width="150" height="150"></canvas>
+					<script>
+					var ctx = document.getElementById("myChart");
+					var myChart = new Chart(ctx, {
+					    type: 'doughnut',
+					    data: {
+					        labels: ["Correct", "Incorred"],
+					        datasets: [{
+					            label: '',
+					            data: [0,0],
+					            backgroundColor: [
+					                'rgba(255, 39, 22, 0.8)',
+					                'rgba(14, 252, 85, 0.8)'
+
+					            ],
+					            borderColor: [
+					                'rgba(155,9,32,1)',
+					                'rgba(14, 152, 35, 1)'
+
+					            ],
+					            borderWidth: 1
+					        }]
+					    },
+					    options: {
+					    	responsive: false,
+					    	maintainAspectRatio: true,
+					    	legend: {
+					    		display: false
+					    	},
+					        scales: {
+					            yAxes: [{
+					            	display: false,
+					                ticks: {
+					                    beginAtZero:true
+					                }
+					            }]
+					        }
+					    }
+					});
+					</script>
+				</div>
+			</div>
+
+		</div>
+		</div>
+	</div>
+
+
+
+{{ template "modalfooter" }}

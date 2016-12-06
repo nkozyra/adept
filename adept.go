@@ -11,10 +11,13 @@ const (
 	configLocation = "config/config.json"
 )
 
-func main() {
-	var x adept.Question
-	fmt.Println(x)
+//	Loads config
+func init() {
 
-	conf := adept.LoadConfig(configLocation)
-	fmt.Println(conf)
+}
+
+//	Starts the magic
+func main() {
+	fmt.Println("Adept server starting")
+	adept.LoadConfig(configLocation)
 }

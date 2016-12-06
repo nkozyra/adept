@@ -1,1 +1,45 @@
-<!-- header -->
+{{define "header"}}
+<!DOCTYPE html>
+<html class="google" lang="en">
+  <head>
+  	<title>Adept</title>
+    <meta charset="utf-8">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <link rel="stylesheet" href="/assets/css/grid.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/adept.css" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/assets/js/adept.js"></script> 
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js"></script>
+  </head>
+<body {{if .Inverse}}class="inverse"{{end}}>
+	<div class="adept-header">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--9-col">
+		    <a href="/"><img class="logo" src="/assets/img/full_logo.svg" style="height:30px;"/></a>
+      </div>
+      <div class="mdl-cell mdl-cell--1-col">
+        <a class="adept-header-link" href="/dashboard">Dashboard</a>
+      </div>      
+      <div class="mdl-cell mdl-cell--1-col">
+        <a class="adept-header-link" href="/courses">Courses</a>
+      </div>
+      <div class="mdl-cell mdl-cell--1-col">
+        {{if .UserSection.User.Authenticated}}
+          <div class="adept-header-user">
+            <span>{{.UserSection.User.Username}}</span>
+            <ul class="adept-header-user-opts"><li><a href="/logout">Log out</a></li></ul>
+          </div>
+        {{else}}<a href="/login" class="adept-header-user">Log In</a>{{end}}
+      </div>
+
+    </div>
+   
+	</div>
+
+
+
+	
+
+{{ end }}
