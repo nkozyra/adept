@@ -8,11 +8,33 @@ var Incorrect = [];
 var idx = 0;
 var Answers = [];
 var time = InitTime;
-var questionTemplate = "<div class='adept-quiz-timer'></div><div><div style='align:right;color:#333;text-align:right'>Question {{index}} of {{length}}</div><h3>{{text}}</h3></div><ul class='adept-questions'>{{#options}}<li><input name='foo' type='radio' data-correct=\"{{#correct}}1{{/correct}}{{^correct}}0{{/correct}}\" /> {{text}}</li>{{/options}}</ul><div style='padding-top:20px;'><a href='#' onclick='EvalAnswer();' class='adept-btn'>Next</a></div>";
+var questionTemplate = "<div class='adept-quiz-timer'></div><div><div style='align:right;color:#333;text-align:right'>Question {{index}} of {{length}}</div><h3>{{{text}}}</h3></div><ul class='adept-questions'>{{#options}}<li><input name='foo' type='radio' data-correct=\"{{#correct}}1{{/correct}}{{^correct}}0{{/correct}}\" /> {{{text}}}</li>{{/options}}</ul><div style='padding-top:20px;'><a href='#' onclick='EvalAnswer();' class='adept-btn big'>Next</a></div>";
 
 var Audio = {
 	correct: new Audio('/assets/sound/adept_correct.mp3'),
 	incorrect: new Audio('/assets/sound/adept_incorrect.mp3'),
+	success: new Audio('/assets/sound/adept_success.mp3'),
+	failure: new Audio('/assets/sound/adept_failure.mp3')
+}
+
+// http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
 }
 
 function UpdateQuiz() {
@@ -44,31 +66,44 @@ function StartQuizTimer() {
 
 function EvalAnswer() {
 
-
+	isLast = false;
 	if (parseInt(idx) > parseInt(QuizQuestions.length-1)) {
-		TallyQuiz();
-		return false;
-	} else {
-		console.log('...');
+		isLast = true;
 	}
 
 	s = $(':checked').attr('data-correct');
 
 	if (s == 1) {
 		Answers.push({correct:true});
-		Audio.correct.play();
 		CorrectCount++;
+		if (!isLast) {
+			Audio.correct.volume = 0.1;
+			Audio.correct.play();
+		}
 	} else {
 		Answers.push({correct:false});		
-		Audio.incorrect.play();	
 		IncorrectCount++;
 		Incorrect.push($(this).closest('h3'));
+		if (!isLast) {
+			Audio.incorrect.play();	
+			Audio.incorrect.volume = 0.7;					
+		}
 	}
 		myChart.data.datasets[0].data[1] = CorrectCount;
 		myChart.data.datasets[0].data[0] = IncorrectCount;
 		myChart.update();	
 	clearTimeout(Timer);
 	time = InitTime;
+
+
+	if (parseInt(idx) > parseInt(QuizQuestions.length-1)) {
+		TallyQuiz();
+		return false;
+	} else {
+
+	}
+
+
 	UpdateQuiz();
 }
 
@@ -82,10 +117,14 @@ function TallyQuiz() {
 		}
 	})
 	avg = correct/total;
-	if (avg > .6) {
-		alert('you passed!');
+	if (avg > .5) {
+		$('.adept-quiz-container').html(Mustache.render("<div><h2>Congratulations</h2>  You passed Level 1 of Learning Javascript with a score of "+(avg*100)+"%.<p><a href='/dashboard'>Back to your dashboard</a>",{ questions: Answers}));		
+		Audio.success.volume = .05;
+		Audio.success.play();
 	} else {
-		alert('you failed!'+ correct/total);
+		$('.adept-quiz-container').html(Mustache.render("Sorry, you did not pass this quiz.  <a href='/course/?/quizzes/?' class='btn'>Try Again</a>",{ questions: Answers}));
+			Audio.failure.volume = .03;		
+		Audio.failure.play();				
 	}
 }
 
@@ -97,6 +136,7 @@ function StartQuiz() {
 		i = 1;
 
 		$(d.Questions).each(function() {
+			this.answers = shuffle(this.answers);
 			q.push({index:i,length: d.Questions.length, text:this.text, options: this.answers});
 			i++;
 		});

@@ -19,6 +19,11 @@ func createSessionId() {
 
 }
 
+type LoginView struct {
+	UserSection UserSection
+	Inverse     bool
+}
+
 // getSession reads session values and
 func getSession(r *http.Request) User {
 	u := User{}
@@ -113,8 +118,12 @@ func authProcess(w http.ResponseWriter, r *http.Request) {
 }
 
 func authHandler(w http.ResponseWriter, r *http.Request) {
+	u := getSession(r)
+	var lv LoginView
+	lv.Inverse = true
+	lv.UserSection.User = u
 	LoadTemplates()
-	Templates.ExecuteTemplate(w, "login.html", nil)
+	Templates.ExecuteTemplate(w, "login.html", lv)
 }
 
 func logoutHandler(w http.ResponseWriter, r *http.Request) {

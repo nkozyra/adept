@@ -1,10 +1,5 @@
-{{ template "modalheader" }}
-	<ul class="adept-breadcrumbs">
-	<li><a href="/">Home</a></li>
-	{{ range .Breadcrumbs.Breadcrumbs }}
-		<li>{{.Text}}</li>
-	{{ end }}
-	</ul>
+{{ template "header" .}}
+
 
 <!-- course -->
 
@@ -23,7 +18,7 @@
 
 				<div class="mdl-cell mdl-cell--12-col">
 					<div style="padding: 10px;text-align: right">
-					<a onclick="document.querySelector('#loginForm').submit();" class="adept-btn adept-btn-login">Log In</a>
+					<a onclick="document.querySelector('#loginForm').submit();" class="adept-btn adept-btn-login big grey">Log In</a>
 					</div>
 				</div>								
 			</div>

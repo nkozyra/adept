@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os/exec"
+	"strconv"
 	"strings"
 	"time"
 
@@ -18,9 +19,22 @@ type QuizPage struct {
 }
 
 func quizGenerator(w http.ResponseWriter, r *http.Request) {
+
+	vars := mux.Vars(r)
+
+	qz := NewQuizzes()
+	quizGUID := vars["quiz"]
+
+	p := make(map[string]string)
+	p["quiz_guid"] = quizGUID
+	qz.Get(p)
+
+	var ids []string
 	var questions Questions
 	for i := 0; i < 10; i++ {
-		questions.Questions = append(questions.Questions, GetRandom(1, 1, 1))
+		newID := GetRandom(qz.Quizzes[0].CourseID, qz.Quizzes[0].Level, 1, ids)
+		ids = append(ids, strconv.FormatInt(newID.ID, int(10)))
+		questions.Questions = append(questions.Questions, newID)
 	}
 
 	validTimestamp := time.Now().Unix()

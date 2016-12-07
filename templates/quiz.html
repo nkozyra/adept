@@ -30,20 +30,22 @@ var Quiz = '{{.Key}}';
 					            data: [0,0],
 					            backgroundColor: [
 					                'rgba(255, 39, 22, 0.8)',
-					                'rgba(14, 252, 85, 0.8)'
+					                'rgba(39, 252, 85, 0.8)'
 
 					            ],
 					            borderColor: [
-					                'rgba(155,9,32,1)',
-					                'rgba(14, 152, 35, 1)'
+					                'rgba(255,255,255,1)',
+					                'rgba(255, 255, 255, 1)'
 
 					            ],
-					            borderWidth: 1
+					            borderWidth: 3
 					        }]
 					    },
 					    options: {
 					    	responsive: false,
 					    	maintainAspectRatio: true,
+					    	cutoutPercentage: 30,
+					    	animateScale:true,
 					    	legend: {
 					    		display: false
 					    	},

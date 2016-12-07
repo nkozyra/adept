@@ -15,6 +15,12 @@ type UserSection struct {
 	User User
 }
 
+func CountUsers() int {
+	var count int
+	DB.QueryRow("SELECT count(*) FROM users").Scan(&count)
+	return count
+}
+
 func (u User) Create() {
 	DB.Exec("INSERT INTO users SET user_name=?, user_email=?, user_salt=?, user_password=?", u.Username, u.Email, u.Salt, u.Password)
 }

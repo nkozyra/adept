@@ -1,10 +1,6 @@
-{{ template "header" }}
-	<ul class="adept-breadcrumbs">
-	<li><a href="/">Home</a></li>
-	{{ range .Breadcrumbs.Breadcrumbs }}
-		<li>{{.Text}}</li>
-	{{ end }}
-	</ul>
+{{ template "header" .}}
+{{ template "subheader" .}}
+
 
 <!-- course -->
 
@@ -37,6 +33,9 @@
 
 				<h2>Available Badges</h2>
 				<p>7-Day Streak</p>
+
+				<h2>Most Active Users</h2>
+
 			</div>
 		</div>
 

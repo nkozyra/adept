@@ -10,6 +10,8 @@ type Quiz struct {
 	Name             string `json:"quiz_name"`
 	ShortDescription string `json:"short_description"`
 	GUID             string `json:"quiz_guid"`
+	CourseID         int64
+	Level            int64
 }
 
 type Quizzes struct {
@@ -44,14 +46,14 @@ func (qzs *Quizzes) Get(params ...map[string]string) {
 
 	WhereString := W.Compile()
 
-	rows, err := DB.Query("SELECT quiz_id, quiz_name, quiz_guid, quiz_short_description FROM quizzes "+WhereString+" LIMIT 100", V.params...)
+	rows, err := DB.Query("SELECT quiz_id, quiz_name, quiz_guid, quiz_short_description, course_id, quiz_level FROM quizzes "+WhereString+" LIMIT 100", V.params...)
 	if err != nil {
 		fmt.Println(err)
 	}
 	defer rows.Close()
 	for rows.Next() {
 		var q Quiz
-		err = rows.Scan(&q.ID, &q.Name, &q.GUID, &q.ShortDescription)
+		err = rows.Scan(&q.ID, &q.Name, &q.GUID, &q.ShortDescription, &q.CourseID, &q.Level)
 		fmt.Println(q)
 		if err != nil {
 		}

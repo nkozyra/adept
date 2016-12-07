@@ -16,6 +16,7 @@ type Course struct {
 	RegCount              int64
 	CourseRegisteredCount int64
 	Registered            bool
+	UserRegistered        bool
 }
 
 type Courses struct {

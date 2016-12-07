@@ -14,12 +14,16 @@ type CourseView struct {
 	Breadcrumbs   Breadcrumbs
 	Quizzes       Quizzes
 	Organizations []Organization
+	UserSection   UserSection
+	Inverse       bool
 }
 
 type CoursesView struct {
-	Courses     Courses
-	Breadcrumbs Breadcrumbs
-	UserSection UserSection
+	Courses       Courses
+	Breadcrumbs   Breadcrumbs
+	UserSection   UserSection
+	Inverse       bool
+	Organizations []Organization
 }
 
 func coursesHandler(w http.ResponseWriter, r *http.Request) {

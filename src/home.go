@@ -10,6 +10,8 @@ type HomeView struct {
 	Courses     Courses
 	Breadcrumbs Breadcrumbs
 	UserSection UserSection
+	Inverse     bool
+	UserCount   int
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
@@ -19,11 +21,13 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 	c := NewCourses()
 	c.UserID = u.ID
 	c.Get()
-	dash := HomeView{Courses: c}
-	dash.UserSection.User = u
-	dash.Foo = "bar"
-	dash.Breadcrumbs = NewBreadcrumbs()
+	home := HomeView{Courses: c}
+	home.UserSection.User = u
+	home.Foo = "bar"
+	home.Inverse = true
+	home.Breadcrumbs = NewBreadcrumbs()
+	home.UserCount = CountUsers()
 
-	fmt.Println(dash)
-	Templates.ExecuteTemplate(w, "dashboard.html", dash)
+	fmt.Println(home)
+	Templates.ExecuteTemplate(w, "home.html", home)
 }
