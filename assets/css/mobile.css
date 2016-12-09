@@ -1,0 +1,32 @@
+@media (max-width: 479px) {
+  .adept-jumbotron h1 {
+    font-size: 40px; }
+
+  .adept-jumbotron {
+    margin-top: 20px; }
+    .adept-jumbotron p {
+      font-size: 18px;
+      width: 100%; }
+
+  .adept-jumbotron, .adept-features, .adept-modal {
+    width: 100%; }
+
+  .adept-features {
+    width: 100%;
+    text-align: center;
+    margin: auto;
+    margin-top: 30px; }
+    .adept-features img {
+      max-width: 80% !important; }
+
+  .adept-quiz-container {
+    padding: 0px; }
+
+  .adept-quiz-grid {
+    width: 100%; }
+
+  .adept-quiz-timer {
+    border-radius: 0%;
+    width: 80px; } }
+
+/*# sourceMappingURL=mobile.css.map */

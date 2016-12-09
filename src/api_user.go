@@ -21,8 +21,13 @@ func CountUsers() int {
 	return count
 }
 
-func (u User) Create() {
-	DB.Exec("INSERT INTO users SET user_name=?, user_email=?, user_salt=?, user_password=?", u.Username, u.Email, u.Salt, u.Password)
+func (u User) Create() bool {
+	_, err := DB.Exec("INSERT INTO users SET user_name=?, user_email=?, user_salt=?, user_password=?", u.Username, u.Email, u.Salt, u.Password)
+	if err != nil {
+		return true
+	} else {
+		return false
+	}
 }
 
 func (u *User) Retrieve() {

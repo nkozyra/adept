@@ -22,7 +22,8 @@ type Course struct {
 type Courses struct {
 	Courses []Course
 
-	UserID int
+	UserID       int
+	Organization int
 }
 
 func NewCourses() Courses {
@@ -41,14 +42,18 @@ func (cs *Courses) Get(params ...map[string]string) {
 	ParamRoute(&W, &V, params)
 
 	if cs.UserID != 0 {
-		W.params = append(W.params, "course_id IN (SELECT course_id FROM users_courses WHERE user_id="+strconv.FormatInt(int64(cs.UserID), 16)+")")
+		W.params = append(W.params, "course_id IN (SELECT course_id FROM users_courses WHERE user_id="+strconv.FormatInt(int64(cs.UserID), 10)+")")
+	}
+	if cs.Organization != 0 {
+		W.params = append(W.params, "c.organization_id="+strconv.FormatInt(int64(cs.Organization), 10))
+		fmt.Println(W.params)
 	}
 
 	WhereString := W.Compile()
 
 	rows, err := DB.Query("SELECT course_id, course_name, course_guid, course_image_url, organization_name, (SELECT count(*) FROM users_courses WHERE course_id=c.course_id) as 'rcount', course_external_id FROM courses c LEFT JOIN organizations o ON o.organization_id=c.organization_id "+WhereString+" ", V.params...)
 	if err != nil {
-		fmt.Println(err)
+		// fmt.Println(err)
 	}
 	defer rows.Close()
 	for rows.Next() {

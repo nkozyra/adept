@@ -27,6 +27,7 @@ func Serve() {
 	r.HandleFunc("/logout", logoutHandler)
 	r.HandleFunc("/dashboard", dashboardHandler)
 	r.HandleFunc("/courses", coursesHandler)
+	r.HandleFunc("/courses/{organization}", coursesHandler)
 	r.HandleFunc("/course/{course}", courseHandler)
 	r.HandleFunc("/course/{course}/join", courseJoinHandler)
 	r.HandleFunc("/course/{course}/quizzes", fooHandler)

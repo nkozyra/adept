@@ -16,16 +16,16 @@
 <body {{if .Inverse}}class="inverse"{{end}}>
 	<div class="adept-header">
     <div class="mdl-grid">
-      <div class="mdl-cell mdl-cell--9-col">
+      <div class="mdl-cell mdl-cell--9-col mdl-cell--2-col-phone">
 		    <a href="/"><img class="logo" src="/assets/img/full_logo.svg" style="height:30px;"/></a>
       </div>
-      <div class="mdl-cell mdl-cell--1-col">
+      <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-phone">
         <a class="adept-header-link" href="/dashboard">Dashboard</a>
       </div>      
-      <div class="mdl-cell mdl-cell--1-col">
+      <div class="mdl-cell mdl-cell--1-col mdl-cell--hide-phone">
         <a class="adept-header-link" href="/courses">Courses</a>
       </div>
-      <div class="mdl-cell mdl-cell--1-col">
+      <div class="mdl-cell mdl-cell--1-col mdl-cell--2-col-phone">
         {{if .UserSection.User.Authenticated}}
           <div class="adept-header-user">
             <span>{{.UserSection.User.Username}}</span>

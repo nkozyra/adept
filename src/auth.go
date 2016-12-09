@@ -22,6 +22,7 @@ func createSessionId() {
 type LoginView struct {
 	UserSection UserSection
 	Inverse     bool
+	Error       bool
 }
 
 // getSession reads session values and
@@ -70,7 +71,19 @@ func makeHash(salt string, p string) (string, string) {
 }
 
 func registerHandler(w http.ResponseWriter, r *http.Request) {
-	Templates.ExecuteTemplate(w, "register.html", nil)
+
+	p := r.URL.Query()
+	err := p.Get("err")
+
+	u := getSession(r)
+	var lv LoginView
+	lv.Inverse = true
+	lv.UserSection.User = u
+	if err != "" {
+		lv.Error = true
+	}
+	LoadTemplates()
+	Templates.ExecuteTemplate(w, "register.html", lv)
 }
 
 func registerProcess(w http.ResponseWriter, r *http.Request) {
@@ -81,8 +94,13 @@ func registerProcess(w http.ResponseWriter, r *http.Request) {
 
 	salt, hash := makeHash("", pass)
 	u := User{Username: username, Password: hash, Salt: salt, Email: email}
-	u.Create()
-	fmt.Println(hash, username, email, pass)
+	err := u.Create()
+
+	if err {
+		http.Redirect(w, r, "/register?err=1", 302)
+	} else {
+		http.Redirect(w, r, "/login", 302)
+	}
 }
 
 func authProcess(w http.ResponseWriter, r *http.Request) {
@@ -103,7 +121,7 @@ func authProcess(w http.ResponseWriter, r *http.Request) {
 		sn, err := uuid.NewV4()
 
 		if err != nil {
-			//
+			//]
 		}
 		session.Values["session_id"] = sn.String()
 		session.Values["user_id"] = u.ID

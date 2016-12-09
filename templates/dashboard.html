@@ -9,6 +9,9 @@
 			<div class="mdl-cell mdl-cell--12-col">
 			<h1>Your Courses</h1>
 			</div>
+			{{ if .NoCourses }}
+				<div class="adept-message">You are currently not enrolled in any courses.  Browse the <a href="/courses">Course Catalog</a> to add a course</div>
+			{{end}}
 			{{ range .Courses.Courses }}
 
 			<div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone adept-course-list-item">

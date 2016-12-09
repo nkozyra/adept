@@ -1,24 +1,25 @@
-{{ template "header" }}
-	<ul class="adept-breadcrumbs">
-	<li><a href="/">Home</a></li>
-	{{ range .Breadcrumbs.Breadcrumbs }}
-		<li>{{.Text}}</li>
-	{{ end }}
-	</ul>
+{{ template "header" .}}
 
-<!-- course -->
 
-	<div class="mdl-grid">
-	<div class="mdl-cell--3-col">
-	</div>
-	<div class="mdl-cell--6-col">
+<!-- register -->
+
+
 		<div class="adept-modal">
 			<form id="registerForm" action="/register" method="post">		
 			<div class="mdl-grid">
 
+
+					
+
+
 				<div class="mdl-cell mdl-cell--12-col">
 					<h1>Register</h1>
 				</div>
+				{{ if .Error }}
+				<div class="mdl-cell mdl-cell--12-col">
+					<div class="adept-alert">User name or email already exists</div>
+				</div>
+				{{ end }}
 				<div class="mdl-cell mdl-cell--12-col">
 					<input type="text" name="username" placeholder="Username" />
 				</div>				
@@ -33,16 +34,12 @@
 				</div>				
 				<div class="mdl-cell mdl-cell--12-col">
 					<div style="padding: 10px;text-align: right">
-					<a onclick="document.querySelector('#registerForm').submit();" class="adept-btn adept-btn-login">Register</a>
+					<a onclick="document.querySelector('#registerForm').submit();" class="adept-btn adept-btn-login grey big">Register</a>
 					</div>
 				</div>							
 			</div>
 			</form>	
 		</div>
-	</div>
-	<div class="mdl-cell--3-col">
-	</div>	
-	</div>
 
 
 {{ template "footer" }}
