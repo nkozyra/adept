@@ -1,4 +1,5 @@
 # Adept
+[![Build Status](https://travis-ci.org/nkozyra/adept.svg?branch=master)](https://travis-ci.org/nkozyra/adept.svg?branch=master)
 The Adept platform is an extensible gamified quiz application intended to use extrinsic reward to foster intrinsic motivation and increase participation toward the goal of topic mastery.
 
 ## Requirements
